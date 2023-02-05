@@ -32,8 +32,7 @@ public class MyLinkedList<T>  {
         }
         ++size;
     }
-
-    //TODO: iterate in both directions
+    
     public T get(int index) {
         if(index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Invalid index");
