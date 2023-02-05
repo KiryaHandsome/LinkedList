@@ -64,6 +64,7 @@ public class MyLinkedList<T>  {
                     current.prev.next = current.next;
                     current.next.prev = current.prev;
                 }
+                --size;
                 return;
             }
             current = current.next;
