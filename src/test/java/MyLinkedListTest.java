@@ -25,4 +25,89 @@ public class MyLinkedListTest {
         Assertions.assertEquals(list.get(4), 1111);
         Assertions.assertEquals(list.get(5), 7777);
     }
+
+    @Test
+    public void removeFirstElementByValueWithExistingValue() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123);
+        list.add(228);
+        list.add(337);
+        Assertions.assertDoesNotThrow(() -> list.remove(Integer.valueOf(123)));
+        Assertions.assertEquals(list.get(0), 228);
+        Assertions.assertEquals(list.get(1), 337);
+    }
+
+    @Test
+    public void removeLastElementByValueWithExistingValue() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123);
+        list.add(228);
+        list.add(337);
+        Assertions.assertDoesNotThrow(() -> list.remove(Integer.valueOf(337)));
+        Assertions.assertEquals(list.get(0), 123);
+        Assertions.assertEquals(list.get(1), 228);
+    }
+
+    @Test
+    public void removeMidElementByValueWithExistingValue() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123);
+        list.add(228);
+        list.add(337);
+        Assertions.assertDoesNotThrow(() -> list.remove(Integer.valueOf(228)));
+        Assertions.assertEquals(list.get(0), 123);
+        Assertions.assertEquals(list.get(1), 337);
+    }
+
+    @Test
+    public void removeElementByValueWithoutExistingValue() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123);
+        list.add(228);
+        list.add(337);
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> list.remove(Integer.valueOf(999)));
+    }
+
+
+    @Test
+    public void removeFirstElementByIndex() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123);
+        list.add(228);
+        list.add(337);
+        Assertions.assertDoesNotThrow(() -> list.remove(0));
+        Assertions.assertEquals(list.get(0), 228);
+        Assertions.assertEquals(list.get(1), 337);
+    }
+
+    @Test
+    public void removeLastElementByIndex() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123);
+        list.add(228);
+        list.add(337);
+        Assertions.assertDoesNotThrow(() -> list.remove(2));
+        Assertions.assertEquals(list.get(0), 123);
+        Assertions.assertEquals(list.get(1), 228);
+    }
+
+    @Test
+    public void removeMidElementByIndex() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123);
+        list.add(228);
+        list.add(337);
+        Assertions.assertDoesNotThrow(() -> list.remove(1));
+        Assertions.assertEquals(list.get(0), 123);
+        Assertions.assertEquals(list.get(1), 337);
+    }
+
+    @Test
+    public void removeElementByIndexWithBigIndex() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123);
+        list.add(228);
+        list.add(337);
+        Assertions.assertThrows(IndexOutOfBoundsException.class, () -> list.remove(Integer.valueOf(999)));
+    }
 }

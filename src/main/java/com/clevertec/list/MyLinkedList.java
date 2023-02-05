@@ -36,7 +36,7 @@ public class MyLinkedList<T>  {
     //TODO: iterate in both directions
     public T get(int index) {
         if(index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Invalid index");
         }
         Node<T> current;
         if(index < size / 2) {
@@ -57,4 +57,52 @@ public class MyLinkedList<T>  {
         return size;
     }
 
+    public void remove(T item) {
+        Node<T> current = head;
+        while(current != null) {
+            if(current.data.equals(item)) {
+                if(current == head && current == tail) {
+                    head = tail = null;
+                } else if(current == head) {
+                    head = head.next;
+                } else if(current == tail) {
+                    tail = tail.prev;
+                } else {
+                    shiftLinks(current);
+                }
+                --size;
+                return;
+            }
+            current = current.next;
+        }
+        throw new IndexOutOfBoundsException("No element with value " + item + "in list");
+    }
+
+    public void remove(int index) {
+        if(index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        if(index == 0) {
+            head = head.next;
+        } else if(index == size - 1) {
+            tail = tail.prev;
+        } else if(index < size / 2) {
+            Node<T> current = head;
+            for(int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            shiftLinks(current);
+        } else {
+            Node<T> current = tail;
+            for(int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+            shiftLinks(current);
+        }
+    }
+
+    private void shiftLinks(Node<T> current) {
+        current.prev.next = current.next;
+        current.next.prev = current.prev;
+    }
 }
