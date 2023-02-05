@@ -36,7 +36,7 @@ public class MyLinkedList<T>  {
     //TODO: iterate in both directions
     public T get(int index) {
         if(index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException();
+            throw new IndexOutOfBoundsException("Invalid index");
         }
         Node<T> current = head;
         while(index > 0) {
@@ -50,4 +50,28 @@ public class MyLinkedList<T>  {
         return size;
     }
 
+    public void remove(T item) {
+        Node<T> current = head;
+        while(current != null) {
+            if(current.data.equals(item)) {
+                if(current == head && current == tail) {
+                    head = tail = null;
+                } else if(current == head) {
+                    head = head.next;
+                } else if(current == tail) {
+                    tail = tail.prev;
+                } else {
+                    current.prev.next = current.next;
+                    current.next.prev = current.prev;
+                }
+                return;
+            }
+            current = current.next;
+        }
+        throw new IndexOutOfBoundsException("No element with value " + item + "in list");
+    }
+
+    public void remove(int index) {
+
+    }
 }
