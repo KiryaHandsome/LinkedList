@@ -1,6 +1,9 @@
 package com.clevertec.list;
 
-public class MyLinkedList<T>  {
+import java.util.Iterator;
+
+public class MyLinkedList<T> implements Iterable<T>{
+
     static class Node<T> {
         private Node<T> next;
         private Node<T> prev;
@@ -12,11 +15,20 @@ public class MyLinkedList<T>  {
 
         Node() {
         }
+
+        public T getData() {
+            return data;
+        }
+
+        public Node<T> getNext() {
+            return next;
+        }
     }
 
     private int size = 0;
     private Node<T> head;
     private Node<T> tail;
+    private Node<T> current;
 
     public MyLinkedList() {
     }
@@ -50,4 +62,32 @@ public class MyLinkedList<T>  {
         return size;
     }
 
+    @Override
+    public Iterator<T> iterator() {
+        return new MyListIterator<>(this);
+    }
+
+    Node<T> getHead() {
+        return head;
+    }
+}
+
+class MyListIterator<T> implements Iterator<T> {
+    private MyLinkedList.Node<T> current;
+
+    MyListIterator(MyLinkedList<T> list) {
+        current = list.getHead();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return current.getNext() != null;
+    }
+
+    @Override
+    public T next() {
+        T data = current.getData();
+        current = current.getNext();
+        return data;
+    }
 }
