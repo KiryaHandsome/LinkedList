@@ -1,6 +1,6 @@
 package com.clevertec.list;
 
-public class MyLinkedList<T>  {
+public class MyLinkedList<T> {
     static class Node<T> {
         private Node<T> next;
         private Node<T> prev;
@@ -32,20 +32,20 @@ public class MyLinkedList<T>  {
         }
         ++size;
     }
-    
+
     public T get(int index) {
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
         Node<T> current;
-        if(index < size / 2) {
+        if (index < size / 2) {
             current = head;
-            for(int i = 0; i < index; i++) {
+            for (int i = 0; i < index; i++) {
                 current = current.next;
             }
         } else {
             current = tail;
-            for(int i = size - 1; i > index; i--) {
+            for (int i = size - 1; i > index; i--) {
                 current = current.prev;
             }
         }
@@ -58,13 +58,13 @@ public class MyLinkedList<T>  {
 
     public void remove(T item) {
         Node<T> current = head;
-        while(current != null) {
-            if(current.data.equals(item)) {
-                if(current == head && current == tail) {
+        while (current != null) {
+            if (current.data.equals(item)) {
+                if (current == head && current == tail) {
                     head = tail = null;
-                } else if(current == head) {
+                } else if (current == head) {
                     head = head.next;
-                } else if(current == tail) {
+                } else if (current == tail) {
                     tail = tail.prev;
                 } else {
                     shiftLinks(current);
@@ -78,22 +78,22 @@ public class MyLinkedList<T>  {
     }
 
     public void remove(int index) {
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
-        if(index == 0) {
+        if (index == 0) {
             head = head.next;
-        } else if(index == size - 1) {
+        } else if (index == size - 1) {
             tail = tail.prev;
-        } else if(index < size / 2) {
+        } else if (index < size / 2) {
             Node<T> current = head;
-            for(int i = 0; i < index; i++) {
+            for (int i = 0; i < index; i++) {
                 current = current.next;
             }
             shiftLinks(current);
         } else {
             Node<T> current = tail;
-            for(int i = size - 1; i > index; i--) {
+            for (int i = size - 1; i > index; i--) {
                 current = current.prev;
             }
             shiftLinks(current);
