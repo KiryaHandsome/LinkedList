@@ -110,4 +110,38 @@ public class MyLinkedListTest {
         list.add(337);
         Assertions.assertThrows(IndexOutOfBoundsException.class, () -> list.remove(Integer.valueOf(999)));
     }
+
+    @Test
+    public void addElementByIndexToBegin() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123, 0);
+        list.add(444, 0);
+        list.add(555, 0);
+        Assertions.assertEquals(list.get(0), 555);
+        Assertions.assertEquals(list.get(1), 444);
+        Assertions.assertEquals(list.get(2), 123);
+    }
+
+    @Test
+    public void addElementByIndexToMid() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123, 0);
+        list.add(444, 1);
+        list.add(555, 1);
+        Assertions.assertEquals(list.get(0), 123);
+        Assertions.assertEquals(list.get(1), 555);
+        Assertions.assertEquals(list.get(2), 444);
+    }
+
+    @Test
+    public void addElementByIndexToEnd() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123, 0);
+        list.add(444, 1);
+        list.add(555, 2);
+        Assertions.assertEquals(list.get(0), 123);
+        Assertions.assertEquals(list.get(1), 444);
+        Assertions.assertEquals(list.get(2), 555);
+    }
+
 }
