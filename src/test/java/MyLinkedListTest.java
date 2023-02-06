@@ -144,4 +144,16 @@ public class MyLinkedListTest {
         Assertions.assertEquals(list.get(2), 555);
     }
 
+    @Test
+    public void foreachTest() {
+        MyLinkedList<Integer> list = new MyLinkedList<>();
+        list.add(123);
+        list.add(228);
+        list.add(337);
+        int[] arr = {123, 228, 337};
+        int counter = 0;
+        for (Integer x : list) {
+            Assertions.assertEquals(x, arr[counter++]);
+        }
+    }
 }

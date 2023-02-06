@@ -1,6 +1,8 @@
 package com.clevertec.list;
 
-public class MyLinkedList<T> {
+import java.util.Iterator;
+
+public class MyLinkedList<T> implements Iterable<T>{
     static class Node<T> {
         private Node<T> next;
         private Node<T> prev;
@@ -8,6 +10,14 @@ public class MyLinkedList<T> {
 
         Node(T data) {
             this.data = data;
+        }
+
+        public T getData() {
+            return data;
+        }
+
+        public Node<T> getNext() {
+            return next;
         }
     }
 
@@ -138,5 +148,34 @@ public class MyLinkedList<T> {
     private void shiftLinks(Node<T> current) {
         current.prev.next = current.next;
         current.next.prev = current.prev;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new MyListIterator<>(this);
+    }
+
+    Node<T> getHead() {
+        return head;
+    }
+}
+
+class MyListIterator<T> implements Iterator<T> {
+    private MyLinkedList.Node<T> current;
+
+    MyListIterator(MyLinkedList<T> list) {
+        current = list.getHead();
+    }
+
+    @Override
+    public boolean hasNext() {
+        return current.getNext() != null;
+    }
+
+    @Override
+    public T next() {
+        T data = current.getData();
+        current = current.getNext();
+        return data;
     }
 }
