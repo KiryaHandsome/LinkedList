@@ -28,7 +28,6 @@ public class MyLinkedList<T> implements Iterable<T>{
     private int size = 0;
     private Node<T> head;
     private Node<T> tail;
-    private Node<T> current;
 
     public MyLinkedList() {
     }
