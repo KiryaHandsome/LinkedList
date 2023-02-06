@@ -32,6 +32,43 @@ public class MyLinkedList<T>  {
         }
         ++size;
     }
+
+    public void add(T item, int index) {
+        if(index < 0 || index > size) {
+            throw new IndexOutOfBoundsException("Invalid index");
+        }
+        Node<T> newNode = new Node<>(item);
+        if(head == null) {
+            head = tail = newNode;
+        } else if(index == 0) {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        } else if(index == size) {
+            newNode.prev = tail;
+            tail.next = newNode;
+            tail = newNode;
+        } else if(index < size / 2) {
+            Node<T> current = head;
+            for(int i = 0; i < index; i++) {
+                current = current.next;
+            }
+            current.next.prev = newNode;
+            newNode.next = current.next;
+            newNode.prev = current;
+            current.next = newNode;
+        } else {
+            Node<T> current = tail;
+            for(int i = size - 1; i > index; i--) {
+                current = current.prev;
+            }
+            current.prev.next = newNode;
+            newNode.prev = current.prev;
+            newNode.next = current;
+            current.prev = newNode;
+        }
+        ++size;
+    }
     
     public T get(int index) {
         if(index < 0 || index >= size) {
@@ -98,6 +135,7 @@ public class MyLinkedList<T>  {
             }
             shiftLinks(current);
         }
+        --size;
     }
 
     private void shiftLinks(Node<T> current) {
