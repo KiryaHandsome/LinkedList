@@ -4,13 +4,10 @@ public class MyLinkedList<T> {
     static class Node<T> {
         private Node<T> next;
         private Node<T> prev;
-        private T data;
+        private final T data;
 
         Node(T data) {
             this.data = data;
-        }
-
-        Node() {
         }
     }
 
